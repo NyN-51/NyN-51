@@ -2,1002 +2,1133 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jon's - Pizzería Gourmet</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1d3557">
+    <title>Sapori di Ton | Pizzas Artesanales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍕</text></svg>">
     <style>
         :root {
-            --rojo: #e63946;
-            --dorado: #ffd700;
-            --gris-claro: #f8f9fa;
-            --gris-oscuro: #212529;
-            --sombra: 0 4px 20px rgba(0,0,0,0.1);
+            --primary: #e63946;
+            --secondary: #f1faee;
+            --accent: #a8dadc;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+            --text: #333;
+            --success: #2a9d8f;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --safe-area-inset-top: env(safe-area-inset-top);
+            --safe-area-inset-bottom: env(safe-area-inset-bottom);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--gris-claro);
-            color: var(--gris-oscuro);
-            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="none" stroke="%23ffd700" stroke-width="1" opacity="0.2"/></svg>');
-            background-size: 120px;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding-top: var(--safe-area-inset-top);
+            padding-bottom: var(--safe-area-inset-bottom);
         }
-
-        .container {
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+        
+        /* Header y navegación */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            padding-top: calc(15px + var(--safe-area-inset-top));
+        }
+        
+        header.scrolled {
+            padding: 10px 5%;
+            padding-top: calc(10px + var(--safe-area-inset-top));
+            background-color: rgba(29, 53, 87, 0.95);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            position: relative;
-        }
-
+        
         .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--rojo);
+            display: flex;
+            align-items: center;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .logo i {
-            margin-right: 10px;
-            color: var(--dorado);
-        }
-
-        /* Carrito */
-        .carrito-btn {
-            background: var(--rojo);
             color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 1rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s;
         }
-
-        .carrito-btn:hover {
-            background: #c1121f;
-            transform: translateY(-2px);
-            box-shadow: var(--sombra);
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-right: 10px;
         }
-
-        .carrito-cantidad {
-            background: var(--dorado);
-            color: var(--gris-oscuro);
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 8px;
-            font-weight: bold;
+        
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
         }
-
-        /* Nav */
-        nav {
-            background: white;
-            padding: 15px 0;
-            border-radius: 50px;
-            margin: 20px 0;
-            box-shadow: var(--sombra);
+        
+        .logo span {
+            color: var(--primary);
         }
-
+        
         nav ul {
             display: flex;
-            justify-content: center;
             list-style: none;
-            padding: 0;
-            margin: 0;
         }
-
-        nav li {
-            margin: 0 15px;
+        
+        nav ul li {
+            margin-left: 25px;
         }
-
-        nav a {
-            color: var(--gris-oscuro);
+        
+        nav ul li a {
+            color: white;
             text-decoration: none;
-            font-weight: 600;
-            padding: 8px 15px;
-            border-radius: 50px;
-            transition: all 0.3s;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 5px 10px;
+            border-radius: 4px;
         }
-
-        nav a:hover {
-            color: var(--rojo);
-            background: rgba(230, 57, 70, 0.1);
+        
+        nav ul li a:hover {
+            color: var(--accent);
+            background: rgba(255,255,255,0.1);
         }
-
-        /* Hero */
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .mobile-menu-btn:active {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
             background-position: center;
-            height: 400px;
-            border-radius: 20px;
+            height: 85vh;
+            min-height: 500px;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            color: white;
+            justify-content: center;
             text-align: center;
-            margin-bottom: 40px;
-            box-shadow: var(--sombra);
+            color: white;
+            padding: 0 20px;
+            padding-bottom: var(--safe-area-inset-bottom);
         }
-
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
         .hero h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 3rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-
+        
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
+            font-size: clamp(1rem, 3vw, 1.2rem);
             margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
-
+        
         .btn {
-            background: var(--dorado);
-            color: var(--gris-oscuro);
-            border: none;
+            display: inline-block;
+            background: var(--primary);
+            color: white;
             padding: 12px 30px;
-            border-radius: 50px;
+            border-radius: 30px;
+            text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            margin: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: var(--sombra);
+            -webkit-user-select: none;
+            user-select: none;
         }
-
-        .btn:hover {
-            background: #e6c200;
+        
+        .btn:hover, .btn:active {
+            background: transparent;
             transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
-        /* Productos */
-        .productos-titulo {
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover, .btn-secondary:active {
+            background: white;
+            color: var(--dark);
+        }
+        
+        /* Secciones */
+        section {
+            padding: 80px 5%;
+            padding-bottom: calc(80px + var(--safe-area-inset-bottom));
+        }
+        
+        .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
-
-        .productos-titulo h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 2.5rem;
-            color: var(--rojo);
+        
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
             margin-bottom: 15px;
         }
-
-        .productos-titulo p {
-            color: #6c757d;
+        
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .section-title p {
             max-width: 700px;
+            margin: 20px auto 0;
+            color: #666;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        /* Menú de Pizzas */
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-
-        .productos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-
-        .producto {
+        
+        .menu-item {
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--sombra);
-            transition: all 0.3s;
-        }
-
-        .producto:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .producto-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .producto-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .producto:hover .producto-img img {
-            transform: scale(1.1);
-        }
-
-        .producto-info {
-            padding: 20px;
-        }
-
-        .producto-info h3 {
-            font-family: 'Poppins', sans-serif;
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: var(--gris-oscuro);
-        }
-
-        .producto-info p {
-            color: #6c757d;
-            margin-bottom: 15px;
-        }
-
-        .producto-precio {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .precio {
-            font-weight: bold;
-            font-size: 1.3rem;
-            color: var(--rojo);
-        }
-
-        .btn-producto {
-            background: var(--rojo);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-producto:hover {
-            background: #c1121f;
-            transform: rotate(90deg);
-        }
-
-        /* Carrito */
-        .carrito {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-            transition: right 0.3s;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .carrito.active {
-            right: 0;
-        }
-
-        .carrito-header {
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .carrito-header h3 {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .cerrar-carrito {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #6c757d;
-        }
-
-        .carrito-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .carrito-item {
-            display: flex;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-
-        .carrito-item-img {
-            width: 80px;
-            height: 80px;
             border-radius: 10px;
             overflow: hidden;
-            margin-right: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            position: relative;
+            will-change: transform;
         }
-
-        .carrito-item-img img {
+        
+        .menu-item:hover {
+            transform: translateY(-10px);
+        }
+        
+        .menu-item-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .menu-item-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+            will-change: transform;
         }
-
-        .carrito-item-info {
-            flex: 1;
+        
+        .menu-item:hover .menu-item-img img {
+            transform: scale(1.1);
         }
-
-        .carrito-item-info h4 {
-            margin: 0 0 5px 0;
-        }
-
-        .carrito-item-info p {
-            margin: 0;
-            color: #6c757d;
-        }
-
-        .carrito-item-cantidad {
-            display: flex;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .carrito-item-cantidad button {
-            background: #eee;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .carrito-item-cantidad span {
-            margin: 0 10px;
-        }
-
-        .carrito-footer {
+        
+        .menu-item-content {
             padding: 20px;
-            border-top: 1px solid #eee;
         }
-
-        .carrito-total {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
+        
+        .menu-item-content h3 {
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            margin-bottom: 10px;
+            color: var(--dark);
         }
-
-        .btn-comprar {
-            width: 100%;
-            padding: 15px;
-            background: var(--rojo);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
+        
+        .menu-item-content p {
+            color: #666;
+            margin-bottom: 15px;
+            min-height: 60px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
-
-        .btn-comprar:hover {
-            background: #c1121f;
-        }
-
-        /* Modal de confirmación */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-contenido {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h3 {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            color: var(--rojo);
-        }
-
-        .cerrar-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #6c757d;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-
-        .form-group input, 
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        .form-group textarea {
-            height: 100px;
-            resize: vertical;
-        }
-
-        .btn-modal {
-            width: 100%;
-            padding: 15px;
-            background: var(--rojo);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-modal:hover {
-            background: #c1121f;
-        }
-
-        /* Contacto */
-        .contacto {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--sombra);
-            margin-bottom: 40px;
-        }
-
-        .contacto h2 {
-            font-family: 'Poppins', sans-serif;
-            color: var(--rojo);
-            margin-top: 0;
-        }
-
-        .contacto-info {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-
-        .contacto-item {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .contacto-item h3 {
-            display: flex;
-            align-items: center;
+        
+        .price {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            font-weight: 700;
+            color: var(--primary);
             margin-bottom: 15px;
         }
-
-        .contacto-item i {
-            margin-right: 10px;
-            color: var(--rojo);
+        
+        .menu-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
         }
-
-        .whatsapp-btn {
-            display: inline-flex;
+        
+        .btn-whatsapp {
+            background: #25D366;
+            border-color: #25D366;
+            flex: 1;
+        }
+        
+        .btn-pago {
+            background: var(--success);
+            border-color: var(--success);
+            flex: 1;
+        }
+        
+        .btn-small {
+            padding: 10px 15px;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            display: flex;
             align-items: center;
+            justify-content: center;
+            gap: 5px;
+            white-space: nowrap;
+        }
+        
+        /* Cómo pedir */
+        .how-to-order {
+            background: var(--secondary);
+        }
+        
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--dark);
+        }
+        
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        }
+        
+        .step p {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        /* Testimonios */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            margin: 20px;
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+        
+        .testimonial:hover {
+            transform: scale(1.02);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+        }
+        
+        /* Contacto */
+        .contact {
+            background: linear-gradient(to right, var(--dark), #2c3e50);
+            color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info h3 {
+            font-size: clamp(1.5rem, 4vw, 1.8rem);
+            margin-bottom: 20px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            font-size: clamp(1.3rem, 3vw, 1.5rem);
+            margin-right: 15px;
+            color: var(--accent);
+            min-width: 30px;
+        }
+        
+        .contact-text h4 {
+            margin-bottom: 5px;
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+        }
+        
+        .contact-text p {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .whatsapp-link {
+            display: inline-block;
             background: #25D366;
             color: white;
             padding: 12px 25px;
-            border-radius: 50px;
+            border-radius: 5px;
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
+            margin-top: 10px;
+            font-weight: 600;
             transition: all 0.3s;
-        }
-
-        .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
-        }
-
-        .whatsapp-btn i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Overlay */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 999;
-            display: none;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* Notificaciones */
-        .notificacion {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 25px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1000;
+            text-align: center;
             display: flex;
             align-items: center;
-            animation: aparecer 0.3s, desaparecer 0.3s 2.7s forwards;
-            opacity: 0;
+            gap: 10px;
+            justify-content: center;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
         }
-
-        .notificacion.error {
-            background-color: #f44336;
+        
+        .whatsapp-link:hover, .whatsapp-link:active {
+            background: #128C7E;
+            transform: translateY(-2px);
         }
-
-        .notificacion.warning {
-            background-color: #ff9800;
+        
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 300px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
-        .notificacion i {
-            margin-right: 10px;
-            font-size: 1.2rem;
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
-
-        @keyframes aparecer {
-            from { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to { 
-                opacity: 1;
-                transform: translateY(0);
-            }
+        
+        /* Footer */
+        footer {
+            background: #111;
+            color: #ddd;
+            padding: 40px 5% 20px;
+            text-align: center;
+            padding-bottom: calc(20px + var(--safe-area-inset-bottom));
         }
-
-        @keyframes desaparecer {
-            from { 
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to { 
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
         }
-
+        
+        .footer-col h4 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: clamp(1.1rem, 3vw, 1.2rem);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .payment-methods i {
+            font-size: clamp(1.8rem, 4vw, 2rem);
+            background: #fff;
+            border-radius: 4px;
+            padding: 5px;
+        }
+        
+        .mp-button {
+            display: inline-block;
+            background: #00a1e4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s;
+            text-align: center;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+        
+        .mp-button:hover, .mp-button:active {
+            background: #0084c2;
+            transform: translateY(-2px);
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
-            .carrito {
-                width: 100%;
+            .mobile-menu-btn {
+                display: block;
             }
             
-            .hero h2 {
-                font-size: 2rem;
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--dark);
+                flex-direction: column;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
             }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+                text-align: center;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+            
+            .menu-buttons {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                height: 75vh;
+            }
+            
+            .hero-content .btn {
+                display: block;
+                margin: 10px auto;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .header-container {
+                flex-wrap: wrap;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Animaciones optimizadas para móviles */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px) scale(0.98);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(40px);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0);
+            }
+        }
+        
+        .animate {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+        
+        /* Mejoras para iOS Safari */
+        input, textarea, button, select, a {
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        
+        /* Evitar zoom en inputs en iOS */
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            select:focus, textarea:focus, input:focus {
+                font-size: 16px;
+            }
+        }
+        
+        /* Optimización de rendimiento */
+        .performance-optimize {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
         }
     </style>
 </head>
 <body>
-    <!-- Overlay -->
-    <div class="overlay" id="overlay"></div>
-
-    <!-- Carrito -->
-    <div class="carrito" id="carrito">
-        <div class="carrito-header">
-            <h3>Tu Pedido</h3>
-            <button class="cerrar-carrito" id="cerrar-carrito">&times;</button>
-        </div>
-        <div class="carrito-items" id="carrito-items">
-            <!-- Items del carrito se agregarán aquí dinámicamente -->
-        </div>
-        <div class="carrito-footer">
-            <div class="carrito-total">
-                <span>Total:</span>
-                <span id="carrito-total">$0</span>
-            </div>
-            <button class="btn-comprar" id="btn-comprar">Finalizar Compra</button>
-        </div>
-    </div>
-
-    <!-- Modal de confirmación -->
-    <div class="modal" id="modal">
-        <div class="modal-contenido">
-            <div class="modal-header">
-                <h3>Confirmar Pedido</h3>
-                <button class="cerrar-modal" id="cerrar-modal">&times;</button>
-            </div>
-            <form id="formulario-pedido">
-                <div class="form-group">
-                    <label for="direccion">Dirección de entrega</label>
-                    <input type="text" id="direccion" required placeholder="Ej: Av. Siempreviva 742">
-                </div>
-                <div class="form-group">
-                    <label for="telefono">Teléfono de contacto</label>
-                    <input type="tel" id="telefono" required placeholder="Ej: 11 2393-3546">
-                </div>
-                <div class="form-group">
-                    <label for="observaciones">Observaciones</label>
-                    <textarea id="observaciones" placeholder="Ej: Timbre roto, dejar con portero"></textarea>
-                </div>
-                <button type="submit" class="btn-modal">Enviar Pedido por WhatsApp</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <a href="#" class="logo">
+    <!-- Header -->
+    <header id="header">
+        <div class="header-container">
+            <a href="https://www.saporiditon.com" class="logo">
                 <i class="fas fa-pizza-slice"></i>
-                Jon's
+                <h1>Sapori <span>di Ton</span></h1>
             </a>
-            <button class="carrito-btn" id="abrir-carrito">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="carrito-cantidad" id="carrito-cantidad">0</span>
+            <button class="mobile-menu-btn" aria-expanded="false" aria-label="Menú principal">
+                <i class="fas fa-bars"></i>
             </button>
-        </header>
+            <nav>
+                <ul id="main-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#como-pedir">Cómo Pedir</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <!-- Nav -->
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#productos">Menú</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-
-        <!-- Hero -->
-        <section class="hero">
-            <h2>Pizza Artesanal</h2>
-            <p>Ingredientes frescos y masa fermentada por 48 horas para el mejor sabor</p>
-            <button class="btn">Ver Menú</button>
-        </section>
-
-        <!-- Productos -->
-        <section id="productos">
-            <div class="productos-titulo">
-                <h2>Nuestras Pizzas</h2>
-                <p>Hechas con pasión y los mejores ingredientes</p>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Auténtica Pizza Italiana en Buenos Aires</h2>
+            <p>Descubre nuestras deliciosas pizzas preparadas con ingredientes frescos y masa artesanal. ¡Pedidos por WhatsApp y pago seguro con MercadoPago!</p>
+            <div>
+                <a href="#menu" class="btn">Ver Menú</a>
+                <a href="https://wa.me/5491123933546?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20de%20pizza" target="_blank" class="btn btn-secondary">
+                    <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                </a>
             </div>
-            <div class="productos-grid">
-                <!-- Producto 1 -->
-                <div class="producto">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pizza Muzzarella">
-                    </div>
-                    <div class="producto-info">
-                        <h3>Muzzarella Italiana</h3>
-                        <p>Salsa de tomate San Marzano, mozzarella di bufala y albahaca fresca</p>
-                        <div class="producto-precio">
-                            <span class="precio">$1200</span>
-                            <button class="btn-producto" data-nombre="Muzzarella Italiana" data-precio="1200" data-imagen="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+        </div>
+    </section>
+
+    <!-- Menú de Pizzas -->
+    <section id="menu">
+        <div class="section-title">
+            <h2>Nuestras Especialidades</h2>
+            <p>Descubre nuestra selección de pizzas artesanales preparadas con los mejores ingredientes</p>
+        </div>
+        
+        <div class="menu-container">
+            <!-- Pizza 1 -->
+            <article class="menu-item animate">
+                <figure class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pizza Margarita" loading="lazy">
+                </figure>
+                <div class="menu-item-content">
+                    <h3>Margarita Clásica</h3>
+                    <p>Salsa de tomate, mozzarella fresca, albahaca y aceite de oliva virgen extra</p>
+                    <div class="price">$1,200</div>
+                    <div class="menu-buttons">
+                        <a href="https://wa.me/5491123933546?text=¡Hola!%20Quiero%20pedir%20una%20Pizza%20Margarita%20Clásica" target="_blank" class="btn btn-whatsapp btn-small">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                        <a href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=123456789" target="_blank" class="btn btn-pago btn-small">
+                            <i class="fas fa-credit-card"></i> Pagar
+                        </a>
                     </div>
                 </div>
-
-                <!-- Producto 2 -->
-                <div class="producto">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1620374645498-af6bd681a0bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Fugazzeta Rellena">
-                    </div>
-                    <div class="producto-info">
-                        <h3>Fugazzeta Rellena</h3>
-                        <p>Cebolla caramelizada, doble capa de muzzarella y jamón natural</p>
-                        <div class="producto-precio">
-                            <span class="precio">$1500</span>
-                            <button class="btn-producto" data-nombre="Fugazzeta Rellena" data-precio="1500" data-imagen="https://images.unsplash.com/photo-1620374645498-af6bd681a0bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Producto 3 -->
-                <div class="producto">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1593504049359-74330189a345?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pizza Pepperoni">
-                    </div>
-                    <div class="producto-info">
-                        <h3>Pepperoni Artesanal</h3>
-                        <p>Doble pepperoni, salsa picante y queso mozzarella premium</p>
-                        <div class="producto-precio">
-                            <span class="precio">$1400</span>
-                            <button class="btn-producto" data-nombre="Pepperoni Artesanal" data-precio="1400" data-imagen="https://images.unsplash.com/photo-1593504049359-74330189a345?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+            </article>
+            
+            <!-- Pizza 2 -->
+            <article class="menu-item animate delay-1">
+                <figure class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pizza Pepperoni" loading="lazy">
+                </figure>
+                <div class="menu-item-content">
+                    <h3>Pepperoni Picante</h3>
+                    <p>Salsa de tomate, mozzarella, pepperoni y pimientos jalapeños</p>
+                    <div class="price">$1,350</div>
+                    <div class="menu-buttons">
+                        <a href="https://wa.me/5491123933546?text=¡Hola!%20Quiero%20pedir%20una%20Pizza%20Pepperoni%20Picante" target="_blank" class="btn btn-whatsapp btn-small">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                        <a href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=123456790" target="_blank" class="btn btn-pago btn-small">
+                            <i class="fas fa-credit-card"></i> Pagar
+                        </a>
                     </div>
                 </div>
+            </article>
+            
+            <!-- Pizza 3 -->
+            <article class="menu-item animate delay-2">
+                <figure class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1593504049359-74330189a345?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pizza Vegetariana" loading="lazy">
+                </figure>
+                <div class="menu-item-content">
+                    <h3>Vegetariana Gourmet</h3>
+                    <p>Mozzarella, champiñones, pimientos, aceitunas, cebolla caramelizada y espinacas</p>
+                    <div class="price">$1,400</div>
+                    <div class="menu-buttons">
+                        <a href="https://wa.me/5491123933546?text=¡Hola!%20Quiero%20pedir%20una%20Pizza%20Vegetariana%20Gourmet" target="_blank" class="btn btn-whatsapp btn-small">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                        <a href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=123456791" target="_blank" class="btn btn-pago btn-small">
+                            <i class="fas fa-credit-card"></i> Pagar
+                        </a>
+                    </div>
+                </div>
+            </article>
+            
+            <!-- Pizza 4 -->
+            <article class="menu-item animate delay-3">
+                <figure class="menu-item-img">
+                    <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pizza Cuatro Quesos" loading="lazy">
+                </figure>
+                <div class="menu-item-content">
+                    <h3>Cuatro Quesos</h3>
+                    <p>Mezcla de mozzarella, gorgonzola, parmesano y provolone con salsa de tomate</p>
+                    <div class="price">$1,500</div>
+                    <div class="menu-buttons">
+                        <a href="https://wa.me/5491123933546?text=¡Hola!%20Quiero%20pedir%20una%20Pizza%20Cuatro%20Quesos" target="_blank" class="btn btn-whatsapp btn-small">
+                            <i class="fab fa-whatsapp"></i> Pedir
+                        </a>
+                        <a href="https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=123456792" target="_blank" class="btn btn-pago btn-small">
+                            <i class="fas fa-credit-card"></i> Pagar
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
 
-                <!-- Producto 4 -->
-                <div class="producto">
-                    <div class="producto-img">
-                        <img src="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pizza Vegetariana">
+    <!-- Cómo Pedir -->
+    <section class="how-to-order" id="como-pedir">
+        <div class="section-title">
+            <h2>Cómo Realizar Tu Pedido</h2>
+            <p>Sigue estos sencillos pasos para disfrutar de nuestras deliciosas pizzas</p>
+        </div>
+        
+        <div class="steps-container">
+            <div class="step animate">
+                <div class="step-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Elige tu pizza</h3>
+                <p>Selecciona tus pizzas favoritas de nuestro menú</p>
+            </div>
+            
+            <div class="step animate delay-1">
+                <div class="step-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <h3>Envía tu pedido por WhatsApp</h3>
+                <p>Haz clic en "Pedir" junto a cada pizza o envía un mensaje directo</p>
+            </div>
+            
+            <div class="step animate delay-2">
+                <div class="step-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h3>Paga con MercadoPago</h3>
+                <p>Realiza el pago de forma segura con nuestro enlace de MercadoPago</p>
+            </div>
+            
+            <div class="step animate delay-3">
+                <div class="step-icon">
+                    <i class="fas fa-pizza-slice"></i>
+                </div>
+                <h3>Recibe tu pedido</h3>
+                <p>Te entregamos tu pizza caliente y lista para disfrutar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="testimonios">
+        <div class="section-title">
+            <h2>Lo que Dicen Nuestros Clientes</h2>
+            <p>La opinión de quienes ya probaron nuestras pizzas</p>
+        </div>
+        
+        <div class="testimonials-container">
+            <div class="testimonial animate">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="testimonial-content">"Las mejores pizzas que he probado. El proceso de pedido por WhatsApp fue súper fácil y rápido. ¡Volveré a pedir!"</p>
+                <p class="testimonial-author">María López</p>
+            </div>
+            
+            <div class="testimonial animate delay-1">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="testimonial-content">"La pizza vegetariana es increíble. Pago seguro con MercadoPago y entrega puntual. ¡Totalmente recomendado!"</p>
+                <p class="testimonial-author">Carlos Rodríguez</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact" id="contacto">
+        <div class="section-title">
+            <h2 style="color: white;">Contacto</h2>
+            <p style="color: #ddd;">Estamos para atenderte y resolver tus dudas</p>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Información de Contacto</h3>
+                
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <div class="producto-info">
-                        <h3>Vegetariana Gourmet</h3>
-                        <p>Berenjena asada, pimientos, espinacas frescas y queso de cabra</p>
-                        <div class="producto-precio">
-                            <span class="precio">$1300</span>
-                            <button class="btn-producto" data-nombre="Vegetariana Gourmet" data-precio="1300" data-imagen="https://images.unsplash.com/photo-1601924582970-9238bcb495d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
+                    <div class="contact-text">
+                        <h4>Dirección</h4>
+                        <p>Tte. Gral. Pedro Farías 1309, Buenos Aires</p>
                     </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Teléfono</h4>
+                        <p>+54 9 11 2393-3546</p>
+                    </div>
+                </div>
+                
+                <div class="contact-detail">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-text">
+                        <h4>Horarios de Entrega</h4>
+                        <p>Lunes a Domingo: 18:00 - 00:00</p>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/5491123933546?text=¡Hola!%20Tengo%20una%20consulta%20sobre%20sus%20pizzas" target="_blank" class="whatsapp-link">
+                    <i class="fab fa-whatsapp"></i> Envíanos un mensaje por WhatsApp
+                </a>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3282.351950309126!2d-58.506502!3d-34.648246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc9b8a5c6a5a5%3A0x8d4e5c5c5c5c5c5c!2sTte.%20Gral.%20Pedro%20Far%C3%ADas%201309%2C%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1686873998781!5m2!1ses!2sar" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h4>Sapori di Ton</h4>
+                <p>Pizzas artesanales preparadas con los mejores ingredientes y mucho amor. Pedidos por WhatsApp y pago seguro con MercadoPago.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5491123933546" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
-        </section>
-
-        <!-- Contacto -->
-        <section id="contacto" class="contacto">
-            <h2>Contacto</h2>
-            <div class="contacto-info">
-                <div class="contacto-item">
-                    <h3><i class="fas fa-phone-alt"></i> Teléfono</h3>
-                    <p>11 2393-3546</p>
-                    <a href="https://wa.me/541123933546" class="whatsapp-btn" target="_blank">
-                        <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
-                    </a>
-                </div>
-                <div class="contacto-item">
-                    <h3><i class="fas fa-map-marker-alt"></i> Dirección</h3>
-                    <p>Calle Falsa 123, Buenos Aires</p>
-                </div>
-                <div class="contacto-item">
-                    <h3><i class="fas fa-clock"></i> Horario</h3>
-                    <p>Lunes a Domingo</p>
-                    <p>18:00 - 00:00 hs</p>
-                </div>
+            
+            <div class="footer-col">
+                <h4>Enlaces Rápidos</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#menu">Menú</a></li>
+                    <li><a href="#como-pedir">Cómo Pedir</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
             </div>
-        </section>
-    </div>
+            
+            <div class="footer-col">
+                <h4>Métodos de Pago</h4>
+                <p>Aceptamos MercadoPago y otras formas de pago seguro.</p>
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa" aria-label="Visa"></i>
+                    <i class="fab fa-cc-mastercard" aria-label="Mastercard"></i>
+                    <i class="fab fa-cc-amex" aria-label="American Express"></i>
+                    <i class="fab fa-cc-paypal" aria-label="PayPal"></i>
+                </div>
+                
+                <a href="https://www.mercadopago.com.ar/payments" target="_blank" class="mp-button">
+                    <i class="fas fa-wallet"></i> Pagar con MercadoPago
+                </a>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 <a href="https://www.saporiditon.com" style="color: var(--accent); text-decoration: none;">www.saporiditon.com</a> - Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <script>
-        // Carrito de compras - VERSIÓN FINAL CORREGIDA
-        document.addEventListener('DOMContentLoaded', function() {
-            let carrito = [];
-            const elementosDOM = {
-                carritoItems: document.getElementById('carrito-items'),
-                carritoTotal: document.getElementById('carrito-total'),
-                carritoCantidad: document.getElementById('carrito-cantidad'),
-                abrirCarrito: document.getElementById('abrir-carrito'),
-                cerrarCarrito: document.getElementById('cerrar-carrito'),
-                btnComprar: document.getElementById('btn-comprar'),
-                overlay: document.getElementById('overlay'),
-                carritoElement: document.getElementById('carrito'),
-                modal: document.getElementById('modal'),
-                cerrarModal: document.getElementById('cerrar-modal'),
-                formularioPedido: document.getElementById('formulario-pedido')
-            };
-
-            // Event Listeners
-            elementosDOM.abrirCarrito.addEventListener('click', abrirCarrito);
-            elementosDOM.cerrarCarrito.addEventListener('click', cerrarCarrito);
-            elementosDOM.overlay.addEventListener('click', cerrarTodo);
-            elementosDOM.btnComprar.addEventListener('click', finalizarCompra);
-            elementosDOM.cerrarModal.addEventListener('click', cerrarModal);
-            elementosDOM.formularioPedido.addEventListener('submit', enviarPedido);
-
-            // Delegación de eventos para botones "Agregar"
-            document.addEventListener('click', function(e) {
-                const boton = e.target.closest('.btn-producto');
-                if (boton) {
-                    const nombre = boton.getAttribute('data-nombre');
-                    const precio = parseFloat(boton.getAttribute('data-precio'));
-                    const imagen = boton.getAttribute('data-imagen');
-                    agregarAlCarrito(nombre, precio, imagen);
-                }
-                
-                // Manejar botones de cantidad en el carrito
-                if (e.target.hasAttribute('data-action')) {
-                    const boton = e.target;
-                    const item = boton.closest('.carrito-item');
-                    const nombre = item.querySelector('h4').textContent;
-                    const accion = boton.getAttribute('data-action');
-                    modificarCantidad(nombre, accion === 'incrementar' ? 1 : -1);
+        // Menú móvil
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navMenu = document.querySelector('nav ul');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            const expanded = navMenu.classList.toggle('show');
+            mobileMenuBtn.setAttribute('aria-expanded', expanded);
+            
+            // Bloquear scroll cuando el menú está abierto
+            document.body.style.overflow = expanded ? 'hidden' : '';
+        });
+        
+        // Cerrar menú al hacer clic en un enlace
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('show');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Animación al hacer scroll - optimizada para móviles
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                    observer.unobserve(entry.target);
                 }
             });
-
-            // Funciones del carrito
-            function agregarAlCarrito(nombre, precio, imagen) {
-                const itemExistente = carrito.find(item => item.nombre === nombre);
-                
-                if (itemExistente) {
-                    itemExistente.cantidad++;
-                    mostrarNotificacion(`+1 ${nombre}`, 'success');
-                } else {
-                    carrito.push({
-                        nombre,
-                        precio,
-                        imagen,
-                        cantidad: 1
-                    });
-                    mostrarNotificacion(`${nombre} añadido al carrito`, 'success');
-                }
-                
-                actualizarCarrito();
-            }
-
-            function actualizarCarrito() {
-                elementosDOM.carritoItems.innerHTML = '';
-                let total = 0;
-                let cantidadTotal = 0;
-
-                carrito.forEach(item => {
-                    const itemHTML = `
-                        <div class="carrito-item">
-                            <div class="carrito-item-img">
-                                <img src="${item.imagen}" alt="${item.nombre}">
-                            </div>
-                            <div class="carrito-item-info">
-                                <h4>${item.nombre}</h4>
-                                <p>$${item.precio}</p>
-                                <div class="carrito-item-cantidad">
-                                    <button data-action="decrementar">-</button>
-                                    <span>${item.cantidad}</span>
-                                    <button data-action="incrementar">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    elementosDOM.carritoItems.insertAdjacentHTML('beforeend', itemHTML);
-                    total += item.precio * item.cantidad;
-                    cantidadTotal += item.cantidad;
-                });
-
-                elementosDOM.carritoTotal.textContent = `$${total.toFixed(2)}`;
-                elementosDOM.carritoCantidad.textContent = cantidadTotal;
-            }
-
-            function modificarCantidad(nombre, cambio) {
-                const item = carrito.find(item => item.nombre === nombre);
-                
-                if (item) {
-                    item.cantidad += cambio;
-                    
-                    if (item.cantidad <= 0) {
-                        carrito = carrito.filter(i => i.nombre !== nombre);
-                        mostrarNotificacion(`${nombre} eliminado`, 'error');
-                    } else {
-                        const mensaje = cambio > 0 ? `+1 ${nombre}` : `-1 ${nombre}`;
-                        mostrarNotificacion(mensaje, cambio > 0 ? 'success' : 'warning');
-                    }
-                    
-                    actualizarCarrito();
-                }
-            }
-
-            // Funciones de UI/UX
-            function abrirCarrito() {
-                elementosDOM.carritoElement.classList.add('active');
-                elementosDOM.overlay.classList.add('active');
-            }
-
-            function cerrarCarrito() {
-                elementosDOM.carritoElement.classList.remove('active');
-                elementosDOM.overlay.classList.remove('active');
-            }
-
-            function cerrarModal() {
-                elementosDOM.modal.style.display = 'none';
-                elementosDOM.overlay.classList.remove('active');
-            }
-
-            function cerrarTodo() {
-                cerrarCarrito();
-                cerrarModal();
-            }
-
-            function finalizarCompra() {
-                if (carrito.length === 0) {
-                    mostrarNotificacion('Agrega productos al carrito primero', 'error');
-                    return;
-                }
-                cerrarCarrito();
-                elementosDOM.modal.style.display = 'flex';
-                elementosDOM.overlay.classList.add('active');
-            }
-
-            function enviarPedido(e) {
-                e.preventDefault();
-                const direccion = document.getElementById('direccion').value;
-                const telefono = document.getElementById('telefono').value;
-                const observaciones = document.getElementById('observaciones').value;
-                
-                let mensaje = `¡Hola Jon's! Quiero hacer este pedido:\n\n${carrito.map(item => 
-                    `- ${item.nombre} x${item.cantidad}: $${item.precio * item.cantidad}`
-                ).join('\n')}\n\n*Total: $${carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0)}*\n\n` +
-                `*Dirección:* ${direccion}\n*Teléfono:* ${telefono}\n` +
-                (observaciones ? `*Observaciones:* ${observaciones}\n` : '');
-                
-                window.open(`https://wa.me/541123933546?text=${encodeURIComponent(mensaje)}`, '_blank');
-                
-                // Resetear
-                carrito = [];
-                actualizarCarrito();
-                elementosDOM.modal.style.display = 'none';
-                elementosDOM.overlay.classList.remove('active');
-                e.target.reset();
-                mostrarNotificacion('Pedido enviado por WhatsApp', 'success');
-            }
-
-            function mostrarNotificacion(mensaje, tipo = 'success') {
-                const iconos = {
-                    success: 'fa-check-circle',
-                    error: 'fa-times-circle',
-                    warning: 'fa-exclamation-circle'
-                };
-                
-                const notificacion = document.createElement('div');
-                notificacion.className = `notificacion ${tipo === 'error' ? 'error' : tipo === 'warning' ? 'warning' : ''}`;
-                notificacion.innerHTML = `
-                    <i class="fas ${iconos[tipo] || 'fa-info-circle'}"></i>
-                    ${mensaje}
-                `;
-                
-                document.body.appendChild(notificacion);
-                
-                setTimeout(() => {
-                    notificacion.remove();
-                }, 3000);
+        }, observerOptions);
+        
+        document.querySelectorAll('.menu-item, .step, .testimonial').forEach(item => {
+            observer.observe(item);
+        });
+        
+        // Cambio de estilo al hacer scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
             }
         });
+        
+        // Smooth scroll para enlaces internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Optimización para iOS - Evitar zoom en inputs
+        document.addEventListener('touchstart', function() {}, {passive: true});
+        
+        // Mejorar rendimiento en iOS
+        if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            document.querySelectorAll('section, .menu-item, .step').forEach(el => {
+                el.classList.add('performance-optimize');
+            });
+        }
+        
+        // Optimizar para Android
+        if (navigator.userAgent.match(/Android/i)) {
+            // Reducir animaciones para mejorar rendimiento
+            document.querySelectorAll('*').forEach(el => {
+                const style = getComputedStyle(el);
+                if (style.animationName !== 'none') {
+                    el.style.animationDuration = '0.5s';
+                }
+            });
+        }
     </script>
 </body>
 </html>
